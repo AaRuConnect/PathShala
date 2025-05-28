@@ -11,9 +11,11 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { MdOutlineLinkedCamera } from "react-icons/md";
+import SignUpFraction from "./SignUpFraction";
+
 import { IoArrowBack } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -22,6 +24,10 @@ const SignUp = () => {
     role: "",
     className: "",
   });
+
+  const [image, setImage] = useState();
+
+  // console.log(image);
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
 
@@ -49,41 +55,43 @@ const SignUp = () => {
 
     setErrors(newErrors);
 
+    if (!image?.name) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Photo must be provided",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
+    }
+
     if (Object.keys(newErrors).length === 0) {
-      console.log("✅ Form submitted:", formData);
+      console.log("Form submitted:", formData);
+      console.log(image?.name);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+    <div className="min-h-screen flex  items-center justify-center bg-gray-100 p-4">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-lg mx-auto p-6 space-y-6 bg-white shadow-md rounded-2xl"
       >
-        <div>
-          <div className="flex flex-col justify-center items-center relative">
-            <Link to={"/"} className="w-[16px] h-[16px] absolute top-5 left-0">
-              <IoArrowBack />
-            </Link>
-            <h3 className="text-[24px] font-bold mb-[32px] mt-[66px]">
-              Create Account
-            </h3>
+        <Link to={"/"} className="w-[16px] h-[16px]">
+          <IoArrowBack />
+        </Link>
 
-            <button className="relative ">
-              <img
-                className="w-20 h-20 rounded-full bg-[#4893bb] hover:bg-[#33627b]"
-                src="https://img.icons8.com/?size=96&id=DnvVED73VLBQ&format=png"
-                alt="profile"
-              />
-              <p className="bg-[#114368] w-8 h-8 rounded-full flex items-center justify-center text-white absolute right-0 bottom-0">
-                <MdOutlineLinkedCamera />
-              </p>
-            </button>
-            <p className="text-[#53433F] font-medium text-[14px]">
-              Add Profile Photo
-            </p>
-          </div>
+        <div className="flex flex-col items-center justify-center">
+          <h3 className="text-[24px] font-bold mb-[30px] mt-[60px]">
+            Create Account
+          </h3>
+          <SignUpFraction setImage={setImage}></SignUpFraction>
+          <p className="text-[#53433F] font-medium text-[14px]">
+            Add Profile Photo
+          </p>
         </div>
+
         {/* full name */}
         <div className="space-y-2">
           <Label htmlFor="fullName">Full Name</Label>
