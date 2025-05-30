@@ -24,11 +24,7 @@ const SignUp = () => {
     role: "",
     className: "",
   });
-
   const [image, setImage] = useState();
-
-  // console.log(image);
-
   const [errors, setErrors] = useState<Partial<FormData>>({});
 
   type FormData = {
@@ -40,7 +36,7 @@ const SignUp = () => {
 
   const handleChange = <T extends keyof FormData>(field: T, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    setErrors((prev) => ({ ...prev, [field]: "" })); // clear error when typing
+    setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
