@@ -1,13 +1,27 @@
 import { createContext } from "react";
+import type { ReactNode } from "react";
 
-export const Auth = createContext();
+interface AuthContextType {
+  name: string;
+  lastname: string;
+  // Add more fields
+}
 
-const AuthProvider = ({ children }) => {
-  let name = "Robiul Hasan";
-  const data = {
+export const Auth = createContext<AuthContextType | null>(null);
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+const AuthProvider = ({ children }: AuthProviderProps) => {
+  const name = "Robiul Hasan";
+  const lastname = "Shakil";
+
+  const data: AuthContextType = {
     name,
-    // add more values later if needed
+    lastname,
   };
+
   return <Auth.Provider value={data}>{children}</Auth.Provider>;
 };
 

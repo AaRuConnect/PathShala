@@ -4,11 +4,13 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { name } = useContext(Auth);
+  const auth = useContext(Auth);
 
   return (
     <div>
-      <p className="text-3xl text-center mt-5">This is Home Page, {name}.</p>
+      <p className="text-3xl text-center mt-5">
+        This is Home Page, {auth?.name} {auth?.lastname}.
+      </p>
       <div className="mt-10 flex justify-center items-center gap-8 place-items-center">
         <Link to={"/singup"}>
           <Button>Sing Up</Button>
