@@ -108,8 +108,19 @@ pathShala/
 │   │   ├── tailwind.config.js
 │   │   ├── components.json       # shadcn config
 │   │   └── tsconfig.json
+│   │   └── .env
+│   │   └── .env.example
 │   └── backend/
 │       ├── src/
+│       │   ├── config/
+│       │   │   ├── db.ts
+│       │   ├── middleware/
+│       │   │   ├── auth.ts
+│       │   │   ├── cors.ts
+│       │   │   └── errorHandler.ts   
+│       │   ├── utils/
+│       │   │   ├── jwt.ts
+│       │   │   └── password.ts         
 │       │   ├── features/
 │       │   │   ├── auth/
 │       │   │   │   ├── router.ts
@@ -121,28 +132,19 @@ pathShala/
 │       │   │       ├── service.ts
 │       │   │       ├── types.ts
 │       │   │       └── constants.ts
-│       │   ├── shared/
-│       │   │   ├── middleware/
-│       │   │   │   ├── auth.ts
-│       │   │   │   ├── cors.ts
-│       │   │   │   └── errorHandler.ts
-│       │   │   ├── utils/
-│       │   │   │   ├── jwt.ts
-│       │   │   │   └── password.ts
-│       │   │   └── database/
-│       │   │       └── client.ts
 │       │   ├── app.ts
 │       │   └── server.ts
 │       ├── prisma/
 │       │   ├── schema.prisma
 │       │   └── migrations/
 │       ├── package.json
+│       ├── .env
+│       ├── .env.example
 │       └── tsconfig.json
 ├── docs/
 │   ├── API.md
 │   └── DEPLOYMENT.md
 ├── .gitignore
-├── .env.example
 ├── docker-compose.dev.yml
 └── README.md
 ```
