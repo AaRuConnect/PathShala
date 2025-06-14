@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  STUDENT
+  TEACHER
+}
+
+model User {
+  id            String           @id @default(uuid())
+  role          Role             @default(STUDENT)
+  username      String           @unique
+  phonenumber   String           @unique
+  email         String           @unique
+  password_hash String
+  is_verified   Boolean          @default(false)
+  is_deleted    Boolean          @default(false)
+  created_at    DateTime         @default(now())
+  updated_at    DateTime         @updatedAt
+  information   UserInformation?
+  verifications PhoneVerification[]
+}
+
+model UserInformation {
+  id         String   @id @default(uuid())
+  user_id    String   @unique
+  user       User     @relation(fields: [user_id], references: [id])
+  url        String?
+  bio        String?
+  image_url  String?
+  date_of_b  DateTime?
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+}
+
+model PhoneVerification {
+  id         String   @id @default(uuid())
+  user_id    String
+  user       User     @relation(fields: [user_id], references: [id])
+  otp        String
+  expires_at DateTime
+  created_at DateTime @default(now())
+  is_used    Boolean  @default(false)
+} 
