@@ -3,10 +3,12 @@ version: '3.8'
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: pathshala-postgres
+    container_name: pathshala
     environment:
-      POSTGRES_USER: dev_user
-      POSTGRES_PASSWORD: dev_password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
       POSTGRES_DB: pathshala_dev
     ports:
       - "5432:5432"
@@ -14,6 +16,11 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - pathshala-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d pathshala_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:
