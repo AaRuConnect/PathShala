@@ -1,11 +1,22 @@
 import { Auth } from "@/AuthProvider/AuthProvider";
 import { Button } from "@/components/ui/button";
+import userLocalStorae from "@/Features/Auth/LogInLocalStorageHook/userLocalStorage";
+
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
   const auth = useContext(Auth);
+  console.log(auth);
 
+  // this is navber code ready to navber and sheeft this------>
+
+  const handelLogOut = () => {
+    if (!auth?.user) return;
+    const { emailOrId, password } = auth.user!;
+    userLocalStorae(emailOrId, password, auth.setUser);
+  };
+  // <--------end
   return (
     <div>
       <p className="text-3xl text-center mt-5">
@@ -15,9 +26,13 @@ const Home = () => {
         <Link to={"/singup"}>
           <Button>Sing Up</Button>
         </Link>
-        <Link to={"/login"}>
-          <Button>Log In</Button>
-        </Link>
+        {auth?.user ? (
+          <Button onClick={handelLogOut}>Log Out</Button>
+        ) : (
+          <Link to={"/login"}>
+            <Button>Log In</Button>
+          </Link>
+        )}
       </div>
     </div>
   );

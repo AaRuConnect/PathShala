@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -7,19 +7,25 @@ import { Label } from "@/components/ui/label";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa6";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import userLocalStorae from "../LogInLocalStorageHook/userLocalStorage";
+import { Auth } from "@/AuthProvider/AuthProvider";
 
 const LogIn = () => {
   const [emailOrId, setEmailOrId] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const auth = useContext(Auth)!;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ emailOrId, password });
+    // Todu: API asar por kichu change korte hobe
+    userLocalStorae(emailOrId, password, auth.setUser);
+    navigate("/");
   };
 
-  //   tagol pass
+  //   tagol password
   const togglePassword = () => {
     setShowPassword((prev) => !prev);
   };
@@ -89,6 +95,9 @@ const LogIn = () => {
               <FaRegEye size={18} />
             )}
           </button>
+        </div>
+        <div className="text-end -mt-4 text-[16px] text-[#114368]">
+          <Link to={"/"}>Forget Password</Link>
         </div>
 
         <Button
