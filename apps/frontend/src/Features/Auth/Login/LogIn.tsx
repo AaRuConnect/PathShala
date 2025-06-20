@@ -12,7 +12,7 @@ import userLocalStorae from "../LogInLocalStorageHook/userLocalStorage";
 import { Auth } from "@/AuthProvider/AuthProvider";
 
 const LogIn = () => {
-  const [emailOrId, setEmailOrId] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const LogIn = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Todu: API asar por kichu change korte hobe
-    userLocalStorae(emailOrId, password, auth.setUser);
+    userLocalStorae(email, password, auth.setUser);
     navigate("/");
   };
 
@@ -67,8 +67,8 @@ const LogIn = () => {
             id="email"
             type="text"
             placeholder="Enter your user ID or Email"
-            value={emailOrId}
-            onChange={(e) => setEmailOrId(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>

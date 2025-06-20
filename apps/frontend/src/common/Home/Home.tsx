@@ -13,8 +13,8 @@ const Home = () => {
 
   const handelLogOut = () => {
     if (!auth?.user) return;
-    const { emailOrId, password } = auth.user!;
-    userLocalStorae(emailOrId, password, auth.setUser);
+    const { email, password } = auth.user!;
+    userLocalStorae(email, password, auth.setUser);
   };
   // <--------end
   return (
@@ -33,6 +33,11 @@ const Home = () => {
             <Button>Log In</Button>
           </Link>
         )}
+      </div>
+      <div className="flex justify-center items-center mt-5">
+        <Button>
+          <Link to={"/profile"}>profile</Link>
+        </Button>
       </div>
     </div>
   );

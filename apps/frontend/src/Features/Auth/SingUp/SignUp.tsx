@@ -141,9 +141,9 @@ const SignUp = () => {
               <SelectValue placeholder="Select role" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="A">A</SelectItem>
-              <SelectItem value="B">B</SelectItem>
-              <SelectItem value="C">C</SelectItem>
+              <SelectItem value="Student">Student</SelectItem>
+              <SelectItem value="Parent">Parent</SelectItem>
+              <SelectItem value="Teacher">Teacher</SelectItem>
             </SelectContent>
           </Select>
           {errors.role && <p className="text-red-500 text-sm">{errors.role}</p>}
