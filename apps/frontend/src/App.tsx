@@ -1,11 +1,14 @@
-import { Button } from "@/components/ui/button";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import EmailVerification from './components/EmailVerification';
 
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-svh">
-      <Button>Click me</Button>
-      <Button variant="destructive">Error</Button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/verify-email" element={<EmailVerification />} />
+        {/* You can add more routes here if needed */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
