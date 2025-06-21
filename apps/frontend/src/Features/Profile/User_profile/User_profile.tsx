@@ -5,10 +5,10 @@ import { GoPencil } from "react-icons/go";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Profile_Assignment from "./Profile_Assignment";
+import { Link } from "react-router-dom";
 
 const User_profile = () => {
   const [active, setActive] = useState<"edit" | "ai">("ai");
-  const [tabValue, setTabValue] = useState("Assignment");
 
   // ----fake data
   const deuCorentday = [
@@ -101,7 +101,7 @@ const User_profile = () => {
               : "rounded-md px-6 text-[16px] h-10 text-[#3B7A9B] w-[45%] lg:w-[30%]"
           }
         >
-          Edit Profile
+          <Link to={"/edit_profile"}>Edit Profile</Link>
         </Button>
         <Button
           variant={active === "ai" ? "default" : "outline"}
@@ -117,41 +117,24 @@ const User_profile = () => {
       </div>
 
       {/* tabs */}
-      <Tabs
-        value={tabValue}
-        onValueChange={setTabValue}
-        className="w-[400px] ml-3 mt-10"
-      >
+      <Tabs value={"Assignment"} className="w-[400px] ml-3 mt-10">
         <TabsList className="bg-white">
           <TabsTrigger
-            className="text-[14px] md:text-[16px] mr-11 text-[#114368] data-[state=active]:shadow-none data-[state=active]:border-b-[#114368] data-[state=active]:border-4 data-[state=active]:rounded-none pb-[15px] px-0"
+            className="text-[14px] md:text-[16px] mr-11 text-[#114368] data-[state=active]:shadow-none data-[state=active]:rounded-none pb-[15px] px-0"
             value="Assignment"
           >
             Assignment
           </TabsTrigger>
-          <TabsTrigger
-            className="text-[14px] md:text-[16px] text-[#114368] data-[state=active]:shadow-none data-[state=active]:border-b-[#114368] data-[state=active]:border-4 data-[state=active]:rounded-none pb-[15px] px-0"
-            value="QR Scan"
-          >
-            QR Scan
-          </TabsTrigger>
         </TabsList>
-
-        {tabValue === "Assignment" && (
-          <TabsContent
-            value="Assignment"
-            className="w-screen -mx-[20px] px-[12px]"
-          >
-            <Profile_Assignment
-              deuCorentday={deuCorentday}
-              comingUp={comingUp}
-            ></Profile_Assignment>
-          </TabsContent>
-        )}
-
-        {tabValue === "QR Scan" && (
-          <TabsContent value="QR Scan">QR Scan here.</TabsContent>
-        )}
+        <TabsContent
+          value="Assignment"
+          className="w-screen -mx-[20px] px-[12px]"
+        >
+          <Profile_Assignment
+            deuCorentday={deuCorentday}
+            comingUp={comingUp}
+          ></Profile_Assignment>
+        </TabsContent>
       </Tabs>
     </div>
   );
