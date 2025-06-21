@@ -191,7 +191,7 @@ export class AuthService {
   }
 
   static async forgotPassword(email: string) {
-    // Always respond with success for security
+    
     const user = await prisma.user.findUnique({ where: { email } });
     if (user) {
       const resetToken = jwt.sign({ userId: user.id }, process.env.EMAIL_SECRET!, { expiresIn: '10m' });
